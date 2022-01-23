@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bdprojekt.register.RegisterController">
+   <children>
+      <AnchorPane prefHeight="80.0" prefWidth="520.0" style="-fx-background-color: #f9b464;">
+         <children>
+            <Label layoutX="203.0" layoutY="23.0" text="Rejestracja" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Label layoutX="31.0" layoutY="88.0" text="Imie" />
+      <TextField fx:id="firstnameTextField" layoutX="30.0" layoutY="105.0" prefHeight="25.0" prefWidth="459.0" promptText="Imie" />
+      <Label layoutX="32.0" layoutY="130.0" text="Nazwisko" />
+      <TextField fx:id="lastnameTextField" layoutX="30.0" layoutY="147.0" prefHeight="25.0" prefWidth="459.0" promptText="Nazwisko" />
+      <Label layoutX="30.0" layoutY="172.0" text="Pesel" />
+      <TextField fx:id="PeselTextField" layoutX="31.0" layoutY="189.0" prefHeight="25.0" prefWidth="459.0" promptText="Pesel" />
+      <Label layoutX="28.0" layoutY="258.0" text="Hasło" />
+      <PasswordField fx:id="PasswordTextField" layoutX="31.0" layoutY="275.0" prefHeight="25.0" prefWidth="459.0" promptText="Haslo" />
+      <Button fx:id="registerButton" layoutX="31.0" layoutY="326.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="25.0" prefWidth="459.0" text="Zarejestruj" />
+      <Button fx:id="rCancelButton" layoutX="31.0" layoutY="361.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="25.0" prefWidth="459.0" text="Anuluj" />
+      <Label fx:id="registerMessageLabel" layoutX="30.0" layoutY="300.0" prefHeight="17.0" prefWidth="459.0" textFill="RED" />
+      <TextField fx:id="telefonTextField1" layoutX="30.0" layoutY="233.0" prefHeight="25.0" prefWidth="459.0" promptText="Numer telefonu" />
+      <Label layoutX="29.0" layoutY="214.0" text="Numer telefonu" />
+   </children>
+</AnchorPane>

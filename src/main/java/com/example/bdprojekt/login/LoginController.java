@@ -9,13 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,6 +19,12 @@ import java.sql.Statement;
 
 
 public class LoginController {
+
+    @FXML
+    private RadioButton pracownikRadioButton;
+
+    @FXML
+    private RadioButton pacjentRadioButton;
 
     @FXML
     private Button cancelButton;
@@ -38,6 +40,9 @@ public class LoginController {
 
     @FXML
     private Label loginMessageLabel;
+
+    @FXML
+    private Button registerButton;
 
     private String username;
 
@@ -86,7 +91,7 @@ public class LoginController {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "select count(1) from useraccounts where username = '" + usernameTextField.getText() + "' and password = '" + passwordPasswordField.getText() + "'";
+        String verifyLogin = "select count(1) from punkt_szczepien.pacjenci where pesel = '" + usernameTextField.getText() + "' and haslo = '" + passwordPasswordField.getText() + "'";
 
         try {
             Statement statement = connectDB.createStatement();
@@ -95,6 +100,7 @@ public class LoginController {
             while (queryResult.next()) {
                 if (queryResult.getInt(1) == 1) {
                     loginMessageLabel.setText("Welcome");
+                    createWidokPacjenta();
                 }else {
                     loginMessageLabel.setText("Invalid Login. Please try again");
                 }
@@ -121,18 +127,32 @@ public class LoginController {
             e.getCause();
         }
     }
-//    public void createSolveStage(){
-//        try{
-//            FXMLLoader fxmlLoader =  new FXMLLoader(Main.class.getResource("solver.fxml"));
-//            Parent root = fxmlLoader.load();
-//            Stage stage = new Stage();
-//            SolverController solve = fxmlLoader.getController();
-//            solve.setUsername(usernameTextField.getText());
-//            stage.setScene(new Scene(root));
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            e.getCause();
-//        }
-//    }
+    public void createWidokPacjenta(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("widokPacjenta.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (Exception error) {
+            error.printStackTrace();
+            error.getCause();
+        }
+    }
+    @FXML
+    void initialize() {
+        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'login.fxml'.";
+        assert loginButton != null : "fx:id=\"loginButton\" was not injected: check your FXML file 'login.fxml'.";
+        assert loginMessageLabel != null : "fx:id=\"loginMessageLabel\" was not injected: check your FXML file 'login.fxml'.";
+        assert pacjentRadioButton != null : "fx:id=\"pacjentRadioButton\" was not injected: check your FXML file 'login.fxml'.";
+        assert passwordPasswordField != null : "fx:id=\"passwordPasswordField\" was not injected: check your FXML file 'login.fxml'.";
+        assert pracownikRadioButton != null : "fx:id=\"pracownikRadioButton\" was not injected: check your FXML file 'login.fxml'.";
+        assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'login.fxml'.";
+        assert usernameTextField != null : "fx:id=\"usernameTextField\" was not injected: check your FXML file 'login.fxml'.";
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+
+    }
+
 }

@@ -13,4 +13,9 @@
       <module name="BDprojekt" target="17" />
     </bytecodeTargetLevel>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="BDprojekt" options="--add-exports java.sql.rowset/com.sun.rowset=com.example.bdprojekt" />
+    </option>
+  </component>
 </project>

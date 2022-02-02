@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="gradient-background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bdprojekt.widokPacjenta.WidokPacjentaController">
+   <children>
+      <HBox layoutY="2.0" prefHeight="70.0" prefWidth="600.0" styleClass="container">
+         <children>
+            <VBox prefHeight="72.0" prefWidth="602.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" text="Panel Uzytkownika">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="5.0" prefWidth="600.0" styleClass="line-color" />
+                  <Label fx:id="uzytkownikLabel" alignment="CENTER" prefHeight="44.0" prefWidth="600.0" text="Uzytkownik">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="5.0" prefWidth="600.0" styleClass="line-color" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <TableView fx:id="pacjentWidok" layoutX="-1.0" layoutY="77.0" prefHeight="247.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="typSzczepieniaColumn" prefWidth="218.0" text="typ szczepienia" />
+          <TableColumn fx:id="producentColumn" minWidth="4.0" prefWidth="107.0" text="producent" />
+            <TableColumn fx:id="terminColumn" minWidth="4.5" prefWidth="116.0" text="termin" />
+            <TableColumn fx:id="godzinaColumn" prefWidth="74.5" text="godzina" />
+            <TableColumn fx:id="zrealizowanoColumn" prefWidth="83.5" text="zrealizowano" />
+        </columns>
+      </TableView>
+      <Button fx:id="zapisButton" layoutX="114.0" layoutY="342.0" mnemonicParsing="false" onAction="#zapiszButtonAction" prefHeight="25.0" prefWidth="164.0" text="Zapisz sie na szczepienie" />
+      <Button fx:id="zakonczButton" layoutX="338.0" layoutY="342.0" mnemonicParsing="false" onAction="#zakonczButtonAction" prefHeight="25.0" prefWidth="183.0" text="Zakończ" />
+   </children>
+</AnchorPane>

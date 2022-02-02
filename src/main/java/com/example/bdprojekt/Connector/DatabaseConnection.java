@@ -8,7 +8,7 @@ public class DatabaseConnection {
     public Connection databaseLink;
 
     public Connection getConnection(){
-        String databaseName = "useraccounts";
+        String databaseName = "punkt_szczepien";
         String databaseUser = "root";
         String databasePassword = "7eGN7yfe4y5C#MSN5T4Nm";
         String url = "jdbc:mysql://localhost/" + databaseName + "?"+

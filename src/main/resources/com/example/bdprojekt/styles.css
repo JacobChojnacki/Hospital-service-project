@@ -1,0 +1,45 @@
+.gradient-background{
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #ff812b, #fcd700);
+}
+
+.line-color{
+    -fx-background-color: #ffffff;
+}
+
+.container{
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-background-radius: 10;
+}
+.invisibleBox{
+    -fx-background-color: transparent;
+}
+.tool-bar{
+    -fx-background-color: #0b3048;
+    -fx-background-radius: 25 25 0 0;
+}
+.background{
+    -fx-background-color: #05263b;
+    -fx-background-radius: 25;
+}
+
+.closeButton{
+    -fx-background-color: #0b3048;
+}
+
+.closeButton:hover{
+    -fx-background-color: #e94e50;
+}
+.chart{
+    -fx-background-color: #05263b;
+}
+.axis-label {
+    -fx-text-fill: #fff
+}
+
+.chart-plot-background{
+    -fx-background-color: transparent;
+}
+.default-color0.chart-series-line { -fx-stroke: #238591; }
+.default-color1.chart-series-line { -fx-stroke: #e5d849; }
+.default-color2.chart-series-line { -fx-stroke: #ed4d51; }
+

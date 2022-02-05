@@ -1,7 +1,6 @@
 package com.example.bdprojekt.Connector;
 
-import com.sun.rowset.CachedRowSetImpl;
-
+import javax.sql.rowset.CachedRowSet;
 import java.sql.*;
 
 public class DbUtill {
@@ -14,7 +13,8 @@ public class DbUtill {
     private static final String connStr = "jdbc:mysql://localhost/" + databaseName + "?"+
             "useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-    public static void dbConnect() throws SQLException,ClassNotFoundException{
+
+    public Connection dbConnect() throws SQLException,ClassNotFoundException{
         try{
             Class.forName(JBDC_DRIVER);
         }catch(ClassNotFoundException e){
@@ -22,296 +22,73 @@ public class DbUtill {
             e.printStackTrace();
             throw e;
         }
-
-        System.out.println("JDBC Driver has been registered !!!");
-
         try{
             connection = DriverManager.getConnection(connStr,databaseUser,databasePassword);
+            System.out.println("JDBC Driver has been registered !!!");
         }catch(SQLException e){
             System.out.println("Connection failed! Check output console " +e);
             throw e;
         }
+        return connection;
     }
     //method for closing the connection
-    public static void dbDisconnect() throws SQLException{
+    public void dbDisconnect() throws SQLException{
         try{
             if(connection != null &&  !connection.isClosed()){
+                System.out.println("Disconnection");
                 connection.close();
             }
         }catch(Exception e) {
             throw e;
         }
     }
-    //this is for insert / delete / update operation
-    public static void dbExecuteQuery(String sqlStmt)throws SQLException, ClassNotFoundException{
-        Statement stmt = null;
-        try{
-            dbConnect();
-            stmt=connection.createStatement();
-            stmt.executeUpdate(sqlStmt);
-        }catch(SQLException e){
-            System.out.println("Problem occured at dbExecuteQuery operation" + e);
-            throw e;
-        }
-        finally{
-            if(stmt!=null){
-                stmt.close();
-            }
+    public ResultSet dbExecuteQuery(String queryStmt) throws SQLException, ClassNotFoundException {
 
-            dbDisconnect();
-        }
-    }
-    //this is for retriving data from database
-    public static ResultSet dbExecute(String sqlQuery) throws ClassNotFoundException,SQLException {
-        Statement stmt = null;
-        ResultSet rs = null;
-        CachedRowSetImpl crs = null;
+        PreparedStatement stmt = null;
+        ResultSet resultSet = null;
+        CachedRowSet crs;
 
-        try{
+        try {
+
             dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery(sqlQuery);
-            crs= new CachedRowSetImpl();
-            crs.populate(rs);
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute operation " + e);
+
+            stmt = connection.prepareStatement(queryStmt);
+
+            resultSet = stmt.executeQuery(queryStmt);
+
+            crs = new CachedRowSetWrapper();
+
+            crs.populate(resultSet);
+        } catch (SQLException e) {
+//            consoleTextArea.appendText("Problem occurred at executeQuery operation. \n");
             throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
+        } finally {
+            if (resultSet != null) {
+                resultSet.close();
             }
-            if (stmt != null ){
+            if (stmt != null) {
                 stmt.close();
             }
             dbDisconnect();
         }
+
         return crs;
     }
-    //gets id int value  of user based on login (pesel)
-    public static int getUserId(String login)throws ClassNotFoundException,SQLException{
-        //   String tab[] = new String
+    public  void dbExecuteUpdate(String sqlStmt) throws SQLException, ClassNotFoundException {
+
         Statement stmt = null;
-        ResultSet rs = null;
-        int id = 0;
-        try{
+        try {
             dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM punkt_szczepien.pacjenci WHERE pacjenci.pesel IN('"+login+"')");
-            while(rs.next()){
-                id=rs.getInt("user_id");
-                System.out.println(id);
-            }
-            // id=rs.getInt("id");
+            stmt = connection.createStatement();
+            stmt.executeUpdate(sqlStmt);
 
-
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute(getUserId) operation " + e);
+        } catch (SQLException e) {
             throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
-            }
-            if (stmt != null ){
+        } finally {
+            if (stmt != null) {
                 stmt.close();
             }
             dbDisconnect();
         }
-        return id;
     }
-    public static int[] getAllIds( )throws ClassNotFoundException,SQLException{
-        //   String tab[] = new String
-        Statement stmt = null;
-        ResultSet rs = null;
-        int id = 0;
-        int iterator=0;
-        int tab[];
-        try{
-            dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM pacjenci ");
-            //first iteration to get size od a table
-            while(rs.next()){
-                id=rs.getInt("user_id");
-                iterator++;
-            }
-
-            rs=stmt.executeQuery("SELECT * FROM pacjenci ");
-            tab= new int[iterator];
-            iterator =0;
-            // second iteration to fill table with ids
-            while(rs.next()){
-                id=rs.getInt("user_id");
-                tab[iterator]=id;
-                iterator++;
-            }
-
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute(getAllIds) operation " + e);
-            throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
-            }
-            if (stmt != null ){
-                stmt.close();
-            }
-            dbDisconnect();
-        }
-
-        return tab;
-    }
-    public static String[] getAllLogins( )throws ClassNotFoundException,SQLException{
-        //   String tab[] = new String
-        Statement stmt = null;
-        ResultSet rs = null;
-        String login = null;
-        int iterator=0;
-        String tab[];
-        try{
-            dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM pacjenci ");
-            //first iteration to get size od a table
-            while(rs.next()){
-                login=rs.getString("user_login");
-                iterator++;
-            }
-
-            rs=stmt.executeQuery("SELECT * FROM pacjenci ");
-            tab= new String[iterator];
-            iterator =0;
-            // second iteration to fill table with ids
-            while(rs.next()){
-                login=rs.getString("user_login");
-                tab[iterator]=login;
-                iterator++;
-            }
-
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute(getAllLogs) operation " + e);
-            throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
-            }
-            if (stmt != null ){
-                stmt.close();
-            }
-            dbDisconnect();
-        }
-
-        return tab;
-    }
-    public static String[] getAllPasswords( )throws ClassNotFoundException,SQLException{
-        //   String tab[] = new String
-        Statement stmt = null;
-        ResultSet rs = null;
-        String password = null;
-        int iterator=0;
-        String tab[];
-        try{
-            dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM pacjenci ");
-            //first iteration to get size od a table
-            while(rs.next()){
-                password=rs.getString("user_password");
-                iterator++;
-            }
-
-            rs=stmt.executeQuery("SELECT * FROM pacjenci ");
-            tab= new String[iterator];
-            iterator =0;
-            // second iteration to fill table with ids
-            while(rs.next()){
-                password=rs.getString("user_password");
-                tab[iterator]=password;
-                iterator++;
-            }
-
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute(getAllPassword) operation " + e);
-            throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
-            }
-            if (stmt != null ){
-                stmt.close();
-            }
-            dbDisconnect();
-        }
-
-        return tab;
-    }
-    public static String getUserType(int id) throws ClassNotFoundException,SQLException{
-        //   String tab[] = new String
-        Statement stmt = null;
-        ResultSet rs = null;
-        String type=null;
-
-        try{
-            dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM pacjenci WHERE ID_p IN('"+id+"')");
-            while(rs.next()){
-                type=rs.getString("user_type");
-                System.out.println(id);
-            }
-            // id=rs.getInt("id");
-
-
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute(getUserId) operation " + e);
-            throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
-            }
-            if (stmt != null ){
-                stmt.close();
-            }
-            dbDisconnect();
-        }
-        return type;
-    }
-    public static String getUserPassword(int id) throws ClassNotFoundException,SQLException{
-        //   String tab[] = new String
-        Statement stmt = null;
-        ResultSet rs = null;
-        String password=null;
-
-        try{
-            dbConnect();
-            stmt=connection.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM pacjenci WHERE ID_p IN('"+id+"')");
-            while(rs.next()){
-                password=rs.getString("user_password");
-                System.out.println(id);
-            }
-            // id=rs.getInt("id");
-
-
-        }catch(SQLException e){
-            System.out.println("Error occured in dbExecute(getUserId) operation " + e);
-            throw e;
-        }
-        finally{
-            if(rs != null){
-                rs.close();
-            }
-            if (stmt != null ){
-                stmt.close();
-            }
-            dbDisconnect();
-        }
-        return password;
-    }
-
 }

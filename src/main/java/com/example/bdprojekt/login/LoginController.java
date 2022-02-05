@@ -3,6 +3,7 @@ package com.example.bdprojekt.login;
 
 
 import com.example.bdprojekt.Connector.DatabaseConnection;
+import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -55,11 +58,13 @@ public class LoginController {
         return username;
     }
 
+    DbUtill dbUtill = new DbUtill();
+
     /**
      * Zwraca boolean w zależnie od tego czy udalo sie zalogowac czy nie
      * @param e - przechwytywane zdarzenie polegajace na kliknieciu przycisku Login
      */
-    public void LoginButtonOnAction(ActionEvent e) {
+    public void LoginButtonOnAction(ActionEvent e) throws SQLException, ClassNotFoundException {
 
 
         if (usernameTextField.getText().isBlank() == false && passwordPasswordField.getText().isBlank() == false) {
@@ -74,8 +79,9 @@ public class LoginController {
      * Metoda zamykajaca nasza aplikacje
      * @param e - przechwytywane zdarzenie polegajace na kliknieciu przycisku cancel
      */
-    public void cancelButtonAction(ActionEvent e) {
+    public void cancelButtonAction(ActionEvent e) throws SQLException {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
+        dbUtill.dbDisconnect();
         stage.close();
     }
 
@@ -87,9 +93,9 @@ public class LoginController {
      * Metoda weryfikujaca poprawnosc danych logowania
      */
 
-    public void validateLogin() {
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
+    public void validateLogin() throws SQLException, ClassNotFoundException {
+
+        Connection connectDB = dbUtill.dbConnect();
 
         String verifyLogin = "select count(1) from punkt_szczepien.pacjenci where pesel = '" + usernameTextField.getText() + "' and haslo = '" + passwordPasswordField.getText() + "'";
 
@@ -98,12 +104,24 @@ public class LoginController {
             ResultSet queryResult = statement.executeQuery(verifyLogin);
 
             while (queryResult.next()) {
-                if (queryResult.getInt(1) == 1) {
-                    loginMessageLabel.setText("Welcome");
-                    createWidokPacjenta();
-                }else {
-                    loginMessageLabel.setText("Invalid Login. Please try again");
+                if(pacjentRadioButton.isSelected()){
+                    if (queryResult.getInt(1) == 1) {
+                        createWidokPacjenta();
+                    }else {
+                        loginMessageLabel.setText("Invalid Login. Please try again");
+                    }
+                }else if(pracownikRadioButton.isSelected()){
+                    if (usernameTextField.getText().equals("przychodnia") && passwordPasswordField.getText().equals("54321")){
+                        createWidokPrzychodni();
+                    }
                 }
+                else {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Blad logowania");
+                    alert.setContentText("Prosze o zaznaczenie jako kto chce sie Pan zalogować.");
+                    alert.showAndWait();
+                }
+
             }
 
         } catch (SQLException e) {
@@ -140,6 +158,18 @@ public class LoginController {
             error.getCause();
         }
     }
+    public void createWidokPrzychodni(){
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource("widokPrzychodni.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @FXML
     void initialize() {
         assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'login.fxml'.";
@@ -151,8 +181,9 @@ public class LoginController {
         assert registerButton != null : "fx:id=\"registerButton\" was not injected: check your FXML file 'login.fxml'.";
         assert usernameTextField != null : "fx:id=\"usernameTextField\" was not injected: check your FXML file 'login.fxml'.";
 
-        ToggleGroup toggleGroup = new ToggleGroup();
-
+        ToggleGroup radioGroup = new ToggleGroup();
+        pacjentRadioButton.setToggleGroup(radioGroup);
+        pracownikRadioButton.setToggleGroup(radioGroup);
     }
 
 }

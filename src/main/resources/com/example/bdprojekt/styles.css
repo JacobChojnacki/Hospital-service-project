@@ -22,11 +22,7 @@
     -fx-background-radius: 25;
 }
 
-.closeButton{
-    -fx-background-color: #0b3048;
-}
-
-.closeButton:hover{
+.button:hover{
     -fx-background-color: #e94e50;
 }
 .chart{

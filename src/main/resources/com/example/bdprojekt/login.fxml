@@ -70,7 +70,7 @@
                   <String fx:value="container" />
                </styleClass></Button>
             <Button fx:id="cancelButton" layoutX="31.0" layoutY="288.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #f9b464;" styleClass="container" stylesheets="@styles.css" text="Cancel" textAlignment="CENTER" textFill="WHITE" />
-            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="22.0" layoutY="86.0" prefHeight="18.0" prefWidth="250.0" textFill="RED" />
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="30.0" layoutY="104.0" prefHeight="18.0" prefWidth="250.0" textFill="RED" />
             <Button fx:id="registerButton" layoutX="31.0" layoutY="340.0" mnemonicParsing="false" onAction="#registerButtonAction" prefHeight="35.0" prefWidth="232.0" style="-fx-background-color: #f9b464;" styleClass="container" stylesheets="@styles.css" text="Register" textFill="WHITE" />
             <RadioButton fx:id="pacjentRadioButton" layoutX="61.0" layoutY="87.0" mnemonicParsing="false" text="Pacjent" />
             <RadioButton fx:id="pracownikRadioButton" layoutX="155.0" layoutY="87.0" mnemonicParsing="false" text="Pracownik" />

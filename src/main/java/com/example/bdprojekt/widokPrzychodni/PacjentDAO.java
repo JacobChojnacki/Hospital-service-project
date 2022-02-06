@@ -19,14 +19,14 @@ public class PacjentDAO {
 
         while (resultSet.next()){
             Pacjent pacjent = new Pacjent();
-            pacjent.setID_p(Integer.parseInt(resultSet.getString("id")));
+            pacjent.setID_p(Integer.parseInt(resultSet.getString("ID_p")));
             pacjent.setNazwisko(resultSet.getString("nazwisko"));
             pacjent.setPesel(resultSet.getString("pesel"));
-//            pacjent.setNumer_telefonu(resultSet.getString("numerTelefonu")); zle
+            pacjent.setNumer_telefonu(resultSet.getString("numer_telefonu"));
 //            pacjent.setTyp(resultSet.getString("typ")); zle
             pacjent.setTermin(resultSet.getString("termin"));
             pacjent.setGodzina(resultSet.getString("godzina"));
-//            pacjent.setZrealizowano(resultSet.getString("zrealizowano")); zle
+            pacjent.setZrealizowano(resultSet.getString("zrealizowano"));
             pacjenci.add(pacjent);
         }
         return pacjenci;
@@ -43,7 +43,7 @@ public class PacjentDAO {
         }
     }
     public ObservableList<Pacjent> szukajPacjenta(String n) throws SQLException, ClassNotFoundException{
-        String selectStmt = "SELECT * FROM punkt_szczepien.widokpunktu WHERE pesel LIKE '% + n + %';";
+        String selectStmt = "SELECT * FROM punkt_szczepien.widokpunktu WHERE pesel LIKE '%" + n + "%';";
 
         try{
             ResultSet resultSet = dbUtill.dbExecuteQuery(selectStmt);
@@ -54,7 +54,7 @@ public class PacjentDAO {
         }
     }
     public void usunPacjenta(String pesel) throws SQLException, ClassNotFoundException {
-        StringBuilder sb = new StringBuilder("DELETE FROM punkt_szczepien.pacjent WHERE pesel = '");
+        StringBuilder sb = new StringBuilder("DELETE FROM punkt_szczepien.pacjenci WHERE pesel = '");
         sb.append(pesel);
         sb.append("';");
         String insertStmt = sb.toString();

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -29,12 +29,12 @@
       <Label alignment="CENTER" layoutX="51.0" layoutY="116.0" prefHeight="17.0" prefWidth="237.0" text="Rodzaj szczepionki" />
       <Label alignment="CENTER" layoutX="51.0" layoutY="200.0" prefHeight="17.0" prefWidth="237.0" text="Data wizyty" />
       <DatePicker fx:id="dataWizytyCalendar" layoutX="51.0" layoutY="233.0" prefHeight="25.0" prefWidth="237.0" />
-      <Label layoutX="435.0" layoutY="200.0" text="Godzina" />
+      <Label layoutX="436.0" layoutY="200.0" text="Godzina" />
       <Label alignment="CENTER" layoutX="338.0" layoutY="112.0" prefHeight="25.0" prefWidth="237.0" text="Producent" />
-      <ChoiceBox fx:id="producentBox" layoutX="339.0" layoutY="141.0" prefHeight="25.0" prefWidth="237.0" />
-      <ChoiceBox fx:id="rodzajSzczepionkiBox" layoutX="51.0" layoutY="141.0" prefHeight="25.0" prefWidth="237.0" />
-      <ChoiceBox fx:id="godzinaBox" layoutX="339.0" layoutY="233.0" prefHeight="25.0" prefWidth="237.0" />
       <Button fx:id="zapiszButton" layoutX="97.0" layoutY="332.0" mnemonicParsing="false" onAction="#zapiszButtonClick" prefHeight="25.0" prefWidth="145.0" text="Zapisz" />
-      <Button fx:id="anulujButton" layoutX="381.0" layoutY="332.0" mnemonicParsing="false" onAction="#anuluButtonClick" prefHeight="25.0" prefWidth="145.0" text="Anuluj" />
+      <Button fx:id="anulujButton" layoutX="381.0" layoutY="332.0" mnemonicParsing="false" onAction="#anulujButtonClick" prefHeight="25.0" prefWidth="145.0" text="Anuluj" />
+      <ComboBox fx:id="rodzajBox" layoutX="51.0" layoutY="141.0" prefHeight="25.0" prefWidth="237.0" />
+      <ComboBox fx:id="producentBox" layoutX="339.0" layoutY="141.0" prefHeight="25.0" prefWidth="237.0" />
+      <ComboBox fx:id="godzinaBox" layoutX="339.0" layoutY="233.0" prefHeight="25.0" prefWidth="237.0" />
    </children>
 </AnchorPane>

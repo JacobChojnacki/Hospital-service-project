@@ -3,12 +3,7 @@ package com.example.bdprojekt.widokPrzychodni;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import com.example.bdprojekt.Connector.DatabaseConnection;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
 import com.example.bdprojekt.models.Pacjent;
@@ -56,7 +51,7 @@ public class PrzychodniaWidok {
     private Button statystykiButton;
 
     @FXML
-    private TableView<Pacjent> pacjenciTable;
+    private TableView pacjenciTable;
 
     @FXML
     private TableColumn<Pacjent, String> termin;
@@ -122,8 +117,17 @@ public class PrzychodniaWidok {
     }
 
     @FXML
-    private void wyszukajButtonClick(ActionEvent e) {
-
+    private void wyszukajButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+        try {
+            if(peselEDX.getText() != null) {
+                pacjenciTable.getItems().clear();
+                ObservableList<Pacjent> pacjenciData = pacjentDAO.szukajPacjenta(peselEDX.getText());
+                bazaPacjentow(pacjenciData);
+                zaladujDane();
+            }
+        }catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
@@ -133,14 +137,7 @@ public class PrzychodniaWidok {
             pacjenciTable.getItems().clear();
             ObservableList<Pacjent> pacjenciData = pacjentDAO.pokazPacjentow();
             bazaPacjentow(pacjenciData);
-            id.setCellValueFactory(new PropertyValueFactory<>("id"));
-            nazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
-            pesel.setCellValueFactory(new PropertyValueFactory<>("pesel"));
-            numerTelefonu.setCellValueFactory(new PropertyValueFactory<>("numerTelefonu"));
-            typ.setCellValueFactory(new PropertyValueFactory<>("typ"));
-            termin.setCellValueFactory(new PropertyValueFactory<>("termin"));
-            godzina.setCellValueFactory(new PropertyValueFactory<>("godzina"));
-            realizacja.setCellValueFactory(new PropertyValueFactory<>("zrealizowano"));
+            zaladujDane();
 
         } catch (SQLException e) {
             throw e;
@@ -153,8 +150,14 @@ public class PrzychodniaWidok {
     }
 
     @FXML
-    private void usunButtonClick(ActionEvent e) {
-
+    private void usunButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+        try {
+            if(peselEDX.getText() != null){
+                pacjentDAO.usunPacjenta(peselEDX.getText());
+            }
+        } catch (SQLException e) {
+            throw e;
+        }
     }
 
     @FXML
@@ -164,5 +167,16 @@ public class PrzychodniaWidok {
 
     private void bazaPacjentow(ObservableList<Pacjent> pacjentData) {
         pacjenciTable.setItems(pacjentData);
+    }
+
+    private void zaladujDane() {
+        id.setCellValueFactory(new PropertyValueFactory<>("ID_p"));
+        nazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
+        pesel.setCellValueFactory(new PropertyValueFactory<>("pesel"));
+        numerTelefonu.setCellValueFactory(new PropertyValueFactory<>("numer_telefonu"));
+        typ.setCellValueFactory(new PropertyValueFactory<>("typ"));
+        termin.setCellValueFactory(new PropertyValueFactory<>("termin"));
+        godzina.setCellValueFactory(new PropertyValueFactory<>("godzina"));
+        realizacja.setCellValueFactory(new PropertyValueFactory<>("zrealizowano"));
     }
 }

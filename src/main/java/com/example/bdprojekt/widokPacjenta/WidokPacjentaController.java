@@ -5,10 +5,9 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.example.bdprojekt.Connector.DatabaseConnection;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
-import com.example.bdprojekt.models.Pacjent;
+import com.example.bdprojekt.models.PacjentWidok;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,13 +28,13 @@ public class WidokPacjentaController {
     private TableView<PacjentWidok> pacjentWidok;
 
     @FXML
-    private TableColumn<PacjentWidok, Time> godzinaColumn;
+    private TableColumn<PacjentWidok, String> godzinaColumn;
 
     @FXML
     private TableColumn<PacjentWidok, String> producentColumn;
 
     @FXML
-    private TableColumn<PacjentWidok, Date> terminColumn;
+    private TableColumn<PacjentWidok, String> terminColumn;
 
     @FXML
     private TableColumn<PacjentWidok, String> typSzczepieniaColumn;
@@ -83,7 +82,7 @@ public class WidokPacjentaController {
         zaladujDane();
     }
 
-    public void createZapisy(){
+    public void createZapisy() {
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("zapisy.fxml"));
             Parent root = loader.load();
@@ -96,31 +95,10 @@ public class WidokPacjentaController {
             error.getCause();
         }
     }
-    private void zaladujDane(){
-        try {
-            connection = dbUtill.dbConnect();
-            resultSet = connection.createStatement().executeQuery("SELECT * FROM widokpacjenta");
-            while(resultSet.next()){
-                pacjentLista.add(new PacjentWidok
-                        (resultSet.getString("choroba"),
-                                resultSet.getString("producent"),
-                                resultSet.getDate("termin"),
-                                resultSet.getTime("godzina"),
-                                resultSet.getString("zrealizowano")));
-            }
-        } catch (SQLException e){
-            Logger.getLogger(WidokPacjentaController.class.getName()).log(Level.SEVERE,null,e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        typSzczepieniaColumn.setCellValueFactory(new PropertyValueFactory<>("choroba"));
-        producentColumn.setCellValueFactory(new PropertyValueFactory<>("producent"));
-        terminColumn.setCellValueFactory(new PropertyValueFactory<>("termin"));
-        godzinaColumn.setCellValueFactory(new PropertyValueFactory<>("godzina"));
-        zrealizowanoColumn.setCellValueFactory(new PropertyValueFactory<>("zrealizowano"));
+    private void zaladujDane() {
 
-        pacjentWidok.setItems(pacjentLista);
     }
 
 }
+

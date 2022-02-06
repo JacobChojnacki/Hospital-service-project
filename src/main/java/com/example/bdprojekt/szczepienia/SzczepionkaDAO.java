@@ -18,7 +18,7 @@ public class SzczepionkaDAO {
 
         while (resultSet.next()){
             Szczepionka szczepionka = new Szczepionka();
-            szczepionka.setID_szcz(Integer.parseInt(resultSet.getString("ID_szcz")));
+            szczepionka.setID_szcz(resultSet.getString("ID_szcz"));
             szczepionka.setChoroba(resultSet.getString("Choroba"));
             szczepionka.setProducent(resultSet.getString("Producent"));
             szczepionki.add(szczepionka);

@@ -51,9 +51,14 @@ public class WidokPacjentaController {
     @FXML
     private TableColumn<PacjentWidok, String> zrealizowanoColumn;
 
+    public void setUzytkownikLabel(String labelText){
+        uzytkownikLabel.setText(labelText);
+    }
+
     Connection connection = null;
     ResultSet resultSet = null;
     DbUtill dbUtill = new DbUtill();
+    ObservableList<PacjentWidok> pacjentWidokLista = FXCollections.observableArrayList();
 
     ObservableList<PacjentWidok> pacjentLista = FXCollections.observableArrayList();
 
@@ -79,6 +84,7 @@ public class WidokPacjentaController {
         assert zakonczButton != null : "fx:id=\"zakonczButton\" was not injected: check your FXML file 'widokPacjenta.fxml'.";
         assert zapisButton != null : "fx:id=\"zapisButton\" was not injected: check your FXML file 'widokPacjenta.fxml'.";
         assert zrealizowanoColumn != null : "fx:id=\"zrealizowanoColumn\" was not injected: check your FXML file 'widokPacjenta.fxml'.";
+
         zaladujDane();
     }
 

@@ -35,14 +35,13 @@
       </HBox>
       <TableView fx:id="pacjenciTable" layoutY="239.0" prefHeight="161.0" prefWidth="605.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="23.0" text="ID" />
-            <TableColumn fx:id="nazwisko" prefWidth="75.0" text="Nazwisko" />
             <TableColumn fx:id="pesel" prefWidth="75.5" text="Pesel" />
+            <TableColumn fx:id="nazwisko" prefWidth="75.0" text="Nazwisko" />
             <TableColumn fx:id="numerTelefonu" prefWidth="108.5" text="Numer telefonu" />
-            <TableColumn fx:id="typ" prefWidth="119.5" text="Typ" />
-            <TableColumn fx:id="termin" prefWidth="79.0" text="Termin" />
-            <TableColumn fx:id="godzina" prefWidth="64.0" text="Godzina" />
-            <TableColumn fx:id="realizacja" prefWidth="59.5" text="Realizacja" />
+            <TableColumn fx:id="typ" prefWidth="90.0" text="Typ" />
+            <TableColumn fx:id="termin" prefWidth="110.6666259765625" text="Termin" />
+            <TableColumn fx:id="godzina" prefWidth="82.00003051757812" text="Godzina" />
+            <TableColumn fx:id="realizacja" prefWidth="62.0" text="Realizacja" />
         </columns>
       </TableView>
       <TextField fx:id="peselEDX" alignment="CENTER" layoutY="102.0" prefHeight="25.0" prefWidth="605.0" promptText="Pesel pacjenta" />

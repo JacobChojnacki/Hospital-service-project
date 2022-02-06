@@ -30,9 +30,6 @@ public class PrzychodniaWidok {
     private TableColumn<Pacjent, String> godzina;
 
     @FXML
-    private TableColumn<Pacjent, Integer> id;
-
-    @FXML
     private TableColumn<Pacjent, String> nazwisko;
 
     @FXML
@@ -83,7 +80,6 @@ public class PrzychodniaWidok {
     @FXML
     void initialize() throws SQLException, ClassNotFoundException {
         assert godzina != null : "fx:id=\"godzina\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
-        assert id != null : "fx:id=\"id\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert nazwisko != null : "fx:id=\"nazwisko\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert numerTelefonu != null : "fx:id=\"numerTelefonu\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert pesel != null : "fx:id=\"pesel\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
@@ -170,7 +166,6 @@ public class PrzychodniaWidok {
     }
 
     private void zaladujDane() {
-        id.setCellValueFactory(new PropertyValueFactory<>("ID_p"));
         nazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
         pesel.setCellValueFactory(new PropertyValueFactory<>("pesel"));
         numerTelefonu.setCellValueFactory(new PropertyValueFactory<>("numer_telefonu"));

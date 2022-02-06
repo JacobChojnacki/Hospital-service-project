@@ -5,10 +5,10 @@ import javafx.beans.property.*;
 public class Szczepionka {
     private StringProperty choroba;
     private StringProperty producent;
-    private IntegerProperty ID_szcz;
+    private StringProperty ID_szcz;
 
     public Szczepionka() {
-        this.ID_szcz = new SimpleIntegerProperty();
+        this.ID_szcz = new SimpleStringProperty();
         this.choroba = new SimpleStringProperty();
         this.producent = new SimpleStringProperty();
     }
@@ -37,15 +37,15 @@ public class Szczepionka {
         this.producent.set(producent);
     }
 
-    public int getID_szcz() {
+    public String getID_szcz() {
         return ID_szcz.get();
     }
 
-    public IntegerProperty ID_szczProperty() {
+    public StringProperty ID_szczProperty() {
         return ID_szcz;
     }
 
-    public void setID_szcz(int ID_szcz) {
+    public void setID_szcz(String ID_szcz) {
         this.ID_szcz.set(ID_szcz);
     }
 }

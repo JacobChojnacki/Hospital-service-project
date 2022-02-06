@@ -5,6 +5,7 @@ package com.example.bdprojekt.login;
 import com.example.bdprojekt.Connector.DatabaseConnection;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
+import com.example.bdprojekt.widokPacjenta.WidokPacjentaController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -108,7 +109,7 @@ public class LoginController {
                     if (queryResult.getInt(1) == 1) {
                         createWidokPacjenta();
                     }else {
-                        loginMessageLabel.setText("Invalid Login. Please try again");
+                        loginMessageLabel.setText("Invalid Login or Password. Please try again");
                     }
                 }else if(pracownikRadioButton.isSelected()){
                     if (usernameTextField.getText().equals("przychodnia") && passwordPasswordField.getText().equals("54321")){
@@ -150,6 +151,8 @@ public class LoginController {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("widokPacjenta.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            WidokPacjentaController widokPacjentaController = loader.getController();
+            widokPacjentaController.setUzytkownikLabel(usernameTextField.getText());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

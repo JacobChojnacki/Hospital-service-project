@@ -3,7 +3,6 @@ package com.example.bdprojekt.models;
 import javafx.beans.property.*;
 
 public class Pacjent {
-    IntegerProperty ID_p;
     StringProperty nazwisko;
     StringProperty pesel;
     StringProperty numer_telefonu;
@@ -13,7 +12,6 @@ public class Pacjent {
     StringProperty zrealizowano;
 
     public Pacjent() {
-        this.ID_p = new SimpleIntegerProperty();
         this.nazwisko = new SimpleStringProperty();
         this.pesel = new SimpleStringProperty();
         this.numer_telefonu = new SimpleStringProperty();
@@ -21,18 +19,6 @@ public class Pacjent {
         this.termin = new SimpleStringProperty();
         this.godzina = new SimpleStringProperty();
         this.zrealizowano = new SimpleStringProperty();
-    }
-
-    public int getID_p() {
-        return ID_p.get();
-    }
-
-    public IntegerProperty ID_pProperty() {
-        return ID_p;
-    }
-
-    public void setID_p(int ID_p) {
-        this.ID_p.set(ID_p);
     }
 
     public String getNazwisko() {

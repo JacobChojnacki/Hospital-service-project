@@ -19,11 +19,10 @@ public class PacjentDAO {
 
         while (resultSet.next()){
             Pacjent pacjent = new Pacjent();
-            pacjent.setID_p(Integer.parseInt(resultSet.getString("ID_p")));
             pacjent.setNazwisko(resultSet.getString("nazwisko"));
             pacjent.setPesel(resultSet.getString("pesel"));
             pacjent.setNumer_telefonu(resultSet.getString("numer_telefonu"));
-//            pacjent.setTyp(resultSet.getString("typ")); zle
+            pacjent.setTyp(resultSet.getString("ID_szcz"));
             pacjent.setTermin(resultSet.getString("termin"));
             pacjent.setGodzina(resultSet.getString("godzina"));
             pacjent.setZrealizowano(resultSet.getString("zrealizowano"));

@@ -69,18 +69,25 @@ public class SzczepieniaController {
         try {
             szczepieniaTabela.getItems().clear();
             ObservableList<Szczepionka> szczepionki = szczepionkaDAO.pokazSzczepionki();
-            porzadanaSzczepionka(szczepionki);
-            ID_szcz.setCellValueFactory(new PropertyValueFactory<>("ID_szcz"));
-            Producent.setCellValueFactory(new PropertyValueFactory<>("Producent"));
-            Choroba.setCellValueFactory(new PropertyValueFactory<>("Choroba"));
+            bazaSzczepionek(szczepionki);
+            wczytajDane();
         }catch (SQLException e){
             throw e;
         }
     }
 
     @FXML
-    void znajdzButtonClick(ActionEvent event) {
-
+    void znajdzButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+        try {
+            if(chorobaEDX.getText() != null){
+                szczepieniaTabela.getItems().clear();
+                ObservableList<Szczepionka> szczepionkiData = szczepionkaDAO.szukajSzczepionki(chorobaEDX.getText());
+                bazaSzczepionek(szczepionkiData);
+                wczytajDane();
+            }
+        }catch (SQLException e){
+            throw e;
+        }
     }
 
     @FXML
@@ -98,12 +105,13 @@ public class SzczepieniaController {
         dbUtill.dbConnect();
         szczepionkaDAO = new SzczepionkaDAO(dbUtill);
     }
-    private void porzadanaSzczepionka(ObservableList<Szczepionka> szukanaSczepionka){
-        szczepieniaTabela.setItems(szukanaSczepionka);
+    private void bazaSzczepionek(ObservableList<Szczepionka> szczepionkaData){
+        szczepieniaTabela.setItems(szczepionkaData);
     }
     private void wczytajDane() {
-
-
+        ID_szcz.setCellValueFactory(new PropertyValueFactory<>("ID_szcz"));
+        Producent.setCellValueFactory(new PropertyValueFactory<>("Producent"));
+        Choroba.setCellValueFactory(new PropertyValueFactory<>("Choroba"));
     }
 }
 

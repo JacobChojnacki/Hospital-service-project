@@ -7,11 +7,25 @@ public class Zapis {
     StringProperty choroba;
     StringProperty producent;
     StringProperty godzina;
+    StringProperty termin;
 
     public Zapis() {
         this.choroba = new SimpleStringProperty();
         this.producent = new SimpleStringProperty();
         this.godzina = new SimpleStringProperty();
+        this.termin = new SimpleStringProperty();
+    }
+
+    public String getTermin() {
+        return termin.get();
+    }
+
+    public StringProperty terminProperty() {
+        return termin;
+    }
+
+    public void setTermin(String termin) {
+        this.termin.set(termin);
     }
 
     public String getChoroba() {

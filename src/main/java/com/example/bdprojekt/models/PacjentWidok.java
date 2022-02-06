@@ -5,15 +5,15 @@ import javafx.beans.property.StringProperty;
 
 public class PacjentWidok {
     private StringProperty pesel;
-    private StringProperty typSzczepienia;
+    private StringProperty choroba;
     private StringProperty producent;
     private StringProperty termin;
     private StringProperty godzina;
     private StringProperty zrealizowano;
 
-    public PacjentWidok(StringProperty pesel) {
+    public PacjentWidok() {
         this.pesel = new SimpleStringProperty();
-        this.typSzczepienia = new SimpleStringProperty();
+        this.choroba = new SimpleStringProperty();
         this.producent = new SimpleStringProperty();
         this.termin = new SimpleStringProperty();
         this.godzina = new SimpleStringProperty();
@@ -32,16 +32,16 @@ public class PacjentWidok {
         this.pesel.set(pesel);
     }
 
-    public String getTypSzczepienia() {
-        return typSzczepienia.get();
+    public String getChoroba() {
+        return choroba.get();
     }
 
-    public StringProperty typSzczepieniaProperty() {
-        return typSzczepienia;
+    public StringProperty chorobaProperty() {
+        return choroba;
     }
 
-    public void setTypSzczepienia(String typSzczepienia) {
-        this.typSzczepienia.set(typSzczepienia);
+    public void setChoroba(String choroba) {
+        this.choroba.set(choroba);
     }
 
     public String getProducent() {

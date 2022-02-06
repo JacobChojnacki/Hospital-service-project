@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.stage.Stage;
 
 public class ZapisyController {
 
@@ -45,8 +46,10 @@ public class ZapisyController {
     private SzczepionkaDAO szczepionkaDAO;
 
     @FXML
-    void anulujButtonClick(ActionEvent event) {
-
+    void anulujButtonClick(ActionEvent event) throws SQLException {
+        Stage stage = (Stage) anulujButton.getScene().getWindow();
+        dbUtill.dbDisconnect();
+        stage.close();
     }
 
     @FXML

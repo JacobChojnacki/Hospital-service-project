@@ -2,10 +2,11 @@ package com.example.bdprojekt.login;
 
 
 
-import com.example.bdprojekt.Connector.DatabaseConnection;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
 import com.example.bdprojekt.widokPacjenta.WidokPacjentaController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -153,6 +154,7 @@ public class LoginController {
             Stage stage = new Stage();
             WidokPacjentaController widokPacjentaController = loader.getController();
             widokPacjentaController.setUzytkownikLabel(usernameTextField.getText());
+            widokPacjentaController.wyswietleniaInformacjiPacjenta(usernameTextField.getText());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

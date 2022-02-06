@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.models.Szczepionka;
-import com.example.bdprojekt.szczepienia.SzczepionkaDAO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -43,7 +42,7 @@ public class ZapisyController {
     private Button zapiszButton;
 
     private DbUtill dbUtill;
-    private SzczepionkaDAO szczepionkaDAO;
+    private ZapisDAO zapisDAO;
 
     @FXML
     void anulujButtonClick(ActionEvent event) throws SQLException {
@@ -53,8 +52,14 @@ public class ZapisyController {
     }
 
     @FXML
-    void zapiszButtonClick(ActionEvent event) {
-
+    void zapiszButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+        try{
+            if(rodzajBox.getValue()!=null && producentBox.getValue()!=null && godzinaBox.getValue()!=null && dataWizytyCalendar.getValue() != null){
+                zapisDAO.dodajZapis(dataWizytyCalendar.getValue().toString(),godzinaBox.getValue().toString(),rodzajBox.getValue(), producentBox.getValue());
+            }
+        }catch (SQLException e){
+            throw e;
+        }
     }
 
     @FXML
@@ -67,7 +72,7 @@ public class ZapisyController {
         assert zapiszButton != null : "fx:id=\"zapiszButton\" was not injected: check your FXML file 'zapisy.fxml'.";
         dbUtill = new DbUtill();
         dbUtill.dbConnect();
-        szczepionkaDAO = new SzczepionkaDAO(dbUtill);
+        zapisDAO = new ZapisDAO(dbUtill);
         loadRodzaj();
         loadProducent();
     }

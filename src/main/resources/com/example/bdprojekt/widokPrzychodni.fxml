@@ -46,9 +46,9 @@
       </TableView>
       <TextField fx:id="peselEDX" alignment="CENTER" layoutY="102.0" prefHeight="25.0" prefWidth="605.0" promptText="Pesel pacjenta" />
       <Button fx:id="wyszukajButton" layoutX="175.0" layoutY="135.0" mnemonicParsing="false" onAction="#wyszukajButtonClick" prefHeight="25.0" prefWidth="256.0" stylesheets="@styles.css" text="Wyszukaj" />
-      <Button fx:id="zarejestrujButton" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#zarejestrujButtonClick" prefHeight="25.0" prefWidth="124.0" stylesheets="@styles.css" text="Zarejestruj pacjenta" />
-      <Button fx:id="usunButton" layoutX="234.0" layoutY="200.0" mnemonicParsing="false" onAction="#usunButtonClick" prefHeight="25.0" prefWidth="138.0" stylesheets="@styles.css" text="Usun pacjenta" />
-      <Button fx:id="statystykiButton" layoutX="453.0" layoutY="200.0" mnemonicParsing="false" onAction="#statystykiButtonClick" prefHeight="25.0" prefWidth="138.0" stylesheets="@styles.css" text="Statystyki" />
+      <Button fx:id="terminyButton" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#terminyButtonClick" prefHeight="25.0" prefWidth="150.0" stylesheets="@styles.css" text="Dodaj termin szczepien" />
+      <Button fx:id="usunButton" layoutX="228.0" layoutY="200.0" mnemonicParsing="false" onAction="#usunButtonClick" prefHeight="25.0" prefWidth="150.0" stylesheets="@styles.css" text="Usun pacjenta" />
+      <Button fx:id="statystykiButton" layoutX="441.0" layoutY="200.0" mnemonicParsing="false" onAction="#statystykiButtonClick" prefHeight="25.0" prefWidth="150.0" stylesheets="@styles.css" text="Statystyki" />
       <Label layoutX="14.0" layoutY="77.0" text="Wyszukaj pacjenta:" />
       <Button fx:id="szczepieniaButton" layoutX="47.0" layoutY="166.0" mnemonicParsing="false" onAction="#szczepieniaButtonClick" prefHeight="25.0" prefWidth="222.0" stylesheets="@styles.css" text="Zarządzanie szczepionkami" />
       <Button fx:id="pacjenciButton" layoutX="337.0" layoutY="166.0" mnemonicParsing="false" onAction="#pacjenciButtonClick" prefHeight="25.0" prefWidth="222.0" stylesheets="@styles.css" text="Pokaz pacjentów" />

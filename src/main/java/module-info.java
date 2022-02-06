@@ -15,4 +15,5 @@ module com.example.bdprojekt {
     opens com.example.bdprojekt.widokPrzychodni;
     opens com.example.bdprojekt.szczepienia;
     opens com.example.bdprojekt.models;
+    opens com.example.bdprojekt.terminy;
 }

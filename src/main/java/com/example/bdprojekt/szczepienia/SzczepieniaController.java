@@ -42,6 +42,9 @@ public class SzczepieniaController {
     private Button pokazButton;
 
     @FXML
+    private TextField idEDX;
+
+    @FXML
     private TextField producentEDX;
 
     @FXML
@@ -57,7 +60,7 @@ public class SzczepieniaController {
     void dodajButtonClick(ActionEvent event) throws SQLException,ClassNotFoundException {
         try {
             if(chorobaEDX.getText() != null && producentEDX.getText() != null){
-                szczepionkaDAO.dodajSzczepionke(chorobaEDX.getText(),producentEDX.getText());
+                szczepionkaDAO.dodajSzczepionke(idEDX.getText(), chorobaEDX.getText(),producentEDX.getText());
             }
         }catch (SQLException e){
             throw e;

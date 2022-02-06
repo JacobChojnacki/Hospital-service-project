@@ -48,8 +48,10 @@ public class SzczepionkaDAO {
             throw e;
         }
     }
-    public void dodajSzczepionke(String choroba,String producent) throws SQLException,ClassNotFoundException {
-        StringBuilder sb = new StringBuilder("INSERT INTO punkt_szczepien.szczepienia(choroba, producent) VALUES('");
+    public void dodajSzczepionke(String IDszcz,String choroba,String producent) throws SQLException,ClassNotFoundException {
+        StringBuilder sb = new StringBuilder("INSERT INTO punkt_szczepien.szczepienia(ID_szcz, choroba, producent) VALUES('");
+        sb.append(IDszcz);
+        sb.append("','");
         sb.append(choroba);
         sb.append("','");
         sb.append(producent);

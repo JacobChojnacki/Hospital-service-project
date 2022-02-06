@@ -66,7 +66,7 @@ public class PrzychodniaWidok {
     private Button wyszukajButton;
 
     @FXML
-    private Button zarejestrujButton;
+    private Button terminButton;
 
     @FXML
     private Button szczepieniaButton;
@@ -91,7 +91,7 @@ public class PrzychodniaWidok {
         assert usunButton != null : "fx:id=\"usunButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert uzytkownikLabel != null : "fx:id=\"uzytkownikLabel\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert wyszukajButton != null : "fx:id=\"wyszukajButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
-        assert zarejestrujButton != null : "fx:id=\"zarejestrujButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
+        assert termin != null : "fx:id=\"terminButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
 
         dbUtill = new DbUtill();
         dbUtill.dbConnect();
@@ -141,8 +141,13 @@ public class PrzychodniaWidok {
     }
 
     @FXML
-    private void zarejestrujButtonClick(ActionEvent e) {
-
+    private void terminyButtonClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("terminy.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

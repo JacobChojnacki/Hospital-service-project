@@ -26,7 +26,7 @@
             <HBox prefHeight="34.0" prefWidth="600.0">
                <children>
                   <Label alignment="CENTER" prefHeight="24.0" prefWidth="234.0" text="Choroba" />
-                  <TextField fx:id="chorobaEDX" />
+                  <TextField fx:id="chorobaEDX" alignment="CENTER" promptText="choroba" />
                </children>
                <VBox.margin>
                   <Insets top="5.0" />
@@ -35,7 +35,8 @@
             <HBox prefHeight="37.0" prefWidth="600.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="234.0" text="Producent" />
-                  <TextField fx:id="producentEDX" prefHeight="25.0" prefWidth="149.0" />
+                  <TextField fx:id="producentEDX" alignment="CENTER" promptText="producent" />
+                  <TextField fx:id="idEDX" alignment="CENTER" prefHeight="25.0" prefWidth="149.0" promptText="idszczepionki" />
                </children>
             </HBox>
             <TableView fx:id="szczepieniaTabela" prefHeight="211.0" prefWidth="600.0">

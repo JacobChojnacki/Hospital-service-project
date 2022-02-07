@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="gradient-background" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bdprojekt.zapisy.ZapisyController">
    <children>
-      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="600.0">
+      <VBox layoutX="-1.0" layoutY="-1.0" prefHeight="62.0" prefWidth="600.0" styleClass="container" stylesheets="@styles.css">
          <children>
             <Label alignment="CENTER" prefHeight="72.0" prefWidth="602.0" text="Ustaw termin wizyty na szczepienie">
                <font>
@@ -26,14 +26,16 @@
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="51.0" layoutY="116.0" prefHeight="17.0" prefWidth="237.0" text="Rodzaj szczepionki" />
-      <Label alignment="CENTER" layoutX="51.0" layoutY="200.0" prefHeight="17.0" prefWidth="237.0" text="Data wizyty" />
-      <Label layoutX="436.0" layoutY="200.0" text="Godzina" />
+      <Label alignment="CENTER" layoutX="51.0" layoutY="217.0" prefHeight="17.0" prefWidth="237.0" text="Data wizyty" />
+      <Label layoutX="436.0" layoutY="217.0" text="Godzina" />
       <Label alignment="CENTER" layoutX="338.0" layoutY="112.0" prefHeight="25.0" prefWidth="237.0" text="Producent" />
-      <Button fx:id="zapiszButton" layoutX="97.0" layoutY="332.0" mnemonicParsing="false" onAction="#zapiszButtonClick" prefHeight="25.0" prefWidth="145.0" text="Zapisz" />
-      <Button fx:id="anulujButton" layoutX="381.0" layoutY="332.0" mnemonicParsing="false" onAction="#anulujButtonClick" prefHeight="25.0" prefWidth="145.0" text="Anuluj" />
+      <Button fx:id="zapiszButton" layoutX="97.0" layoutY="332.0" mnemonicParsing="false" onAction="#zapiszButtonClick" prefHeight="25.0" prefWidth="145.0" stylesheets="@styles.css" text="Zapisz" />
+      <Button fx:id="anulujButton" layoutX="381.0" layoutY="332.0" mnemonicParsing="false" onAction="#anulujButtonClick" prefHeight="25.0" prefWidth="145.0" stylesheets="@styles.css" text="Anuluj" />
       <ComboBox fx:id="rodzajBox" layoutX="51.0" layoutY="141.0" prefHeight="25.0" prefWidth="237.0" />
       <ComboBox fx:id="producentBox" layoutX="339.0" layoutY="141.0" prefHeight="25.0" prefWidth="237.0" />
-      <ComboBox fx:id="godzinaBox" layoutX="339.0" layoutY="233.0" prefHeight="25.0" prefWidth="237.0" />
-      <ComboBox fx:id="dataBox" layoutX="51.0" layoutY="233.0" prefHeight="25.0" prefWidth="237.0" />
+      <ComboBox fx:id="godzinaBox" layoutX="340.0" layoutY="246.0" prefHeight="25.0" prefWidth="237.0" />
+      <ComboBox fx:id="dataWizytyBox" layoutX="53.0" layoutY="246.0" prefHeight="25.0" prefWidth="237.0" />
+      <Button fx:id="confirmRodzajButton" layoutX="78.0" layoutY="182.0" mnemonicParsing="false" onAction="#confirmRodzajButtonAction" prefHeight="25.0" prefWidth="183.0" stylesheets="@styles.css" text="Potwierdz rodzaj szczepionki" />
+      <Button fx:id="confirmDateButton" layoutX="79.0" layoutY="283.0" mnemonicParsing="false" onAction="#confirmDateButtonAction" prefHeight="25.0" prefWidth="183.0" stylesheets="@styles.css" text="Potwierdz date wizyty" />
    </children>
 </AnchorPane>

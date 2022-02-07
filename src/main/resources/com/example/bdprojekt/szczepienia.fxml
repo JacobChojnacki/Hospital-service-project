@@ -36,7 +36,6 @@
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="28.0" prefWidth="234.0" text="Producent" />
                   <TextField fx:id="producentEDX" alignment="CENTER" promptText="producent" />
-                  <TextField fx:id="idEDX" alignment="CENTER" prefHeight="25.0" prefWidth="149.0" promptText="idszczepionki" />
                </children>
             </HBox>
             <TableView fx:id="szczepieniaTabela" prefHeight="211.0" prefWidth="600.0">

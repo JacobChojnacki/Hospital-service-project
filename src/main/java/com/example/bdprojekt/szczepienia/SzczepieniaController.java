@@ -41,8 +41,6 @@ public class SzczepieniaController {
     @FXML
     private Button pokazButton;
 
-    @FXML
-    private TextField idEDX;
 
     @FXML
     private TextField producentEDX;
@@ -60,7 +58,7 @@ public class SzczepieniaController {
     void dodajButtonClick(ActionEvent event) throws SQLException,ClassNotFoundException {
         try {
             if(chorobaEDX.getText() != null && producentEDX.getText() != null){
-                szczepionkaDAO.dodajSzczepionke(idEDX.getText(), chorobaEDX.getText(),producentEDX.getText());
+                szczepionkaDAO.dodajSzczepionke(creatorID(), chorobaEDX.getText(),producentEDX.getText());
             }
         }catch (SQLException e){
             throw e;
@@ -115,6 +113,13 @@ public class SzczepieniaController {
         ID_szcz.setCellValueFactory(new PropertyValueFactory<>("ID_szcz"));
         Producent.setCellValueFactory(new PropertyValueFactory<>("Producent"));
         Choroba.setCellValueFactory(new PropertyValueFactory<>("Choroba"));
+    }
+
+    private String creatorID(){
+        StringBuilder idCreator = new StringBuilder();
+        idCreator.append(chorobaEDX.getText().substring(0,3).toUpperCase());
+        idCreator.append(producentEDX.getText().substring(0,3).toUpperCase());
+        return idCreator.toString();
     }
 }
 

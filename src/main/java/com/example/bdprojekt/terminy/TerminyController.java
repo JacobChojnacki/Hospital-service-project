@@ -31,9 +31,6 @@ public class TerminyController {
     @FXML
     private Button zatwierdzButton;
 
-    @FXML
-    private TextField realizacjaEDX;
-
     private DbUtill dbUtill;
 
     @FXML
@@ -46,8 +43,8 @@ public class TerminyController {
     @FXML
     void zatwierdzButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
-            if(dataTermin.getText() != null && godzinaTerminy.getText() != null && realizacjaEDX.getText() != null){
-                dodajTermin(dataTermin.getText(),godzinaTerminy.getText(),realizacjaEDX.getText());
+            if(dataTermin.getText() != null && godzinaTerminy.getText() != null){
+                dodajTermin(dataTermin.getText(),godzinaTerminy.getText());
             }
         }catch (SQLException e) {
             throw e;
@@ -64,13 +61,13 @@ public class TerminyController {
         dbUtill.dbConnect();
     }
 
-    public void dodajTermin(String termin, String godzina, String realizacja) throws SQLException, ClassNotFoundException {
+    public void dodajTermin(String termin, String godzina) throws SQLException, ClassNotFoundException {
         StringBuilder sb = new StringBuilder("INSERT INTO punkt_szczepien.wizyty(termin,godzina,zrealizowano) VALUES ('");
         sb.append(termin);
         sb.append("','");
         sb.append(godzina);
         sb.append("','");
-        sb.append(realizacja);
+        sb.append("nie");
         sb.append("');");
         String insertStmt = sb.toString();
 

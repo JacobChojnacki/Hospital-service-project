@@ -4,15 +4,16 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
 import com.example.bdprojekt.Connector.DbUtill;
-import com.example.bdprojekt.models.Szczepionka;
+import com.example.bdprojekt.models.Wizyty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.stage.Stage;
 
 public class ZapisyController {
@@ -27,22 +28,32 @@ public class ZapisyController {
     private Button anulujButton;
 
     @FXML
-    private DatePicker dataWizytyCalendar;
+    private ComboBox<Wizyty> godzinaBox;
 
     @FXML
-    private ComboBox<?> godzinaBox;
+    private ComboBox<Wizyty> producentBox;
 
     @FXML
-    private ComboBox<Szczepionka> producentBox;
+    private ComboBox<Wizyty> rodzajBox;
 
     @FXML
-    private ComboBox<Szczepionka> rodzajBox;
+    private ComboBox<Wizyty> dataWizytyBox;
 
     @FXML
     private Button zapiszButton;
 
     private DbUtill dbUtill;
-    private ZapisDAO zapisDAO;
+    private WizytyDAO wizytyDao;
+
+    @FXML
+    void confirmRodzajButtonAction(ActionEvent event) {
+        loadProducent();
+    }
+
+    @FXML
+    void confirmDateButtonAction(ActionEvent event) {
+        loadGodzina();
+    }
 
     @FXML
     void anulujButtonClick(ActionEvent event) throws SQLException {
@@ -54,8 +65,8 @@ public class ZapisyController {
     @FXML
     void zapiszButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try{
-            if(rodzajBox.getValue()!=null && producentBox.getValue()!=null && godzinaBox.getValue()!=null && dataWizytyCalendar.getValue() != null){
-                zapisDAO.dodajZapis(dataWizytyCalendar.getValue().toString(),godzinaBox.getValue().toString(),rodzajBox.getValue(), producentBox.getValue());
+            if(rodzajBox.getValue()!=null && producentBox.getValue()!=null && godzinaBox.getValue()!=null && dataWizytyBox.getValue() != null){
+                wizytyDao.dodajZapis("99011003939","DURANT",dataWizytyBox.getValue().toString(),godzinaBox.getValue().toString());
             }
         }catch (SQLException e){
             throw e;
@@ -65,16 +76,16 @@ public class ZapisyController {
     @FXML
     void initialize() throws SQLException, ClassNotFoundException {
         assert anulujButton != null : "fx:id=\"anulujButton\" was not injected: check your FXML file 'zapisy.fxml'.";
-        assert dataWizytyCalendar != null : "fx:id=\"dataWizytyCalendar\" was not injected: check your FXML file 'zapisy.fxml'.";
+        assert dataWizytyBox != null : "fx:id=\"dataWizytyBox\" was not injected: check your FXML file 'zapisy.fxml'.";
         assert godzinaBox != null : "fx:id=\"godzinaBox\" was not injected: check your FXML file 'zapisy.fxml'.";
         assert producentBox != null : "fx:id=\"producentBox\" was not injected: check your FXML file 'zapisy.fxml'.";
         assert rodzajBox != null : "fx:id=\"rodzajBox\" was not injected: check your FXML file 'zapisy.fxml'.";
         assert zapiszButton != null : "fx:id=\"zapiszButton\" was not injected: check your FXML file 'zapisy.fxml'.";
         dbUtill = new DbUtill();
         dbUtill.dbConnect();
-        zapisDAO = new ZapisDAO(dbUtill);
+        wizytyDao = new WizytyDAO(dbUtill);
         loadRodzaj();
-        loadProducent();
+        loadDataWizyty();
     }
     private void loadRodzaj(){
         String selectStmt = "SELECT choroba FROM punkt_szczepien.szczepienia;";
@@ -85,13 +96,16 @@ public class ZapisyController {
             while (resultSet.next()) {
                 choroba.add(resultSet.getString("choroba"));
             }
-            rodzajBox.setItems(choroba);
+            rodzajBox.setItems((ObservableList<Wizyty>) choroba
+                    .stream()
+                    .distinct()
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList)));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
     private void loadProducent(){
-        String selectStmt = "SELECT producent FROM punkt_szczepien.szczepienia;";
+        String selectStmt = "SELECT producent FROM punkt_szczepien.szczepienia WHERE choroba = '" + rodzajBox.getValue() + "';";
         try {
             ResultSet resultSet = dbUtill.dbExecuteQuery(selectStmt);
 
@@ -99,10 +113,52 @@ public class ZapisyController {
             while (resultSet.next()) {
                 producent.add(resultSet.getString("producent"));
             }
-            producentBox.setItems(producent);
+            producentBox.setItems((ObservableList<Wizyty>) producent.stream()
+                    .distinct()
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadDataWizyty(){
+        String selectStmt = "SELECT termin FROM punkt_szczepien.wizyty;";
+        try {
+            ResultSet resultSet = dbUtill.dbExecuteQuery(selectStmt);
+
+            ObservableList dataWizyty = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                dataWizyty.add(resultSet.getString("termin"));
+            }
+            dataWizytyBox.setItems((ObservableList<Wizyty>) dataWizyty.stream()
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList)));
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loadGodzina(){
+        String selectStmt = "SELECT godzina FROM punkt_szczepien.wizyty WHERE termin = '" + dataWizytyBox.getValue() + "' and pesel is null;";
+        try {
+            ResultSet resultSet = dbUtill.dbExecuteQuery(selectStmt);
+
+            ObservableList godzinaWizyty = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                godzinaWizyty.add(resultSet.getString("godzina"));
+            }
+            godzinaBox.setItems((ObservableList<Wizyty>) godzinaWizyty.stream()
+                    .distinct()
+                    .sorted()
+                    .collect(Collectors.toCollection((FXCollections::observableArrayList))));
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
+    private String creatorID(){
+        StringBuilder idCreator = new StringBuilder();
+        idCreator.append(rodzajBox.getValue().toString().substring(0,3).toUpperCase());
+        idCreator.append(producentBox.getValue().toString().substring(0,3).toUpperCase());
+        return idCreator.toString();
+    }
 }

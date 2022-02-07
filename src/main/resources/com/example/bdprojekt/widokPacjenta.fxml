@@ -41,7 +41,7 @@
             <TableColumn fx:id="zrealizowanoColumn" prefWidth="83.5" text="zrealizowano" />
         </columns>
       </TableView>
-      <Button fx:id="zapisButton" layoutX="114.0" layoutY="342.0" mnemonicParsing="false" onAction="#zapiszButtonAction" prefHeight="25.0" prefWidth="164.0" text="Zapisz sie na szczepienie" />
+      <Button fx:id="zapiszButton" layoutX="60.0" layoutY="342.0" mnemonicParsing="false" onAction="#zapiszButtonAction" prefHeight="25.0" prefWidth="164.0" text="Zapisz sie na szczepienie" />
       <Button fx:id="zakonczButton" layoutX="338.0" layoutY="342.0" mnemonicParsing="false" onAction="#zakonczButtonAction" prefHeight="25.0" prefWidth="183.0" text="Zakończ" />
    </children>
 </AnchorPane>

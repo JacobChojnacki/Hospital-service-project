@@ -9,11 +9,11 @@ module com.example.bdprojekt {
     exports com.example.bdprojekt;
     opens com.example.bdprojekt.Connector;
     opens com.example.bdprojekt.login;
-    opens com.example.bdprojekt.register;
-    opens com.example.bdprojekt.widokPacjenta;
-    opens com.example.bdprojekt.zapisy;
-    opens com.example.bdprojekt.widokPrzychodni;
-    opens com.example.bdprojekt.szczepienia;
     opens com.example.bdprojekt.models;
+    opens com.example.bdprojekt.register;
+    opens com.example.bdprojekt.szczepienia;
     opens com.example.bdprojekt.terminy;
+    opens com.example.bdprojekt.widokPacjenta;
+    opens com.example.bdprojekt.widokPrzychodni;
+    opens com.example.bdprojekt.zapisy;
 }

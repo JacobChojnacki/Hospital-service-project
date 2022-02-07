@@ -155,6 +155,7 @@ public class LoginController {
             WidokPacjentaController widokPacjentaController = loader.getController();
             widokPacjentaController.setUzytkownikLabel(usernameTextField.getText());
             widokPacjentaController.wyswietleniaInformacjiPacjenta(usernameTextField.getText());
+            widokPacjentaController.setN(usernameTextField.getText());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();

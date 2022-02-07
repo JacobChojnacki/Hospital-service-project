@@ -45,6 +45,14 @@ public class WidokPacjentaController {
 
     private String n;
 
+    public String getN() {
+        return n;
+    }
+
+    public void setN(String n) {
+        this.n = n;
+    }
+
     @FXML
     private TableColumn<PacjentWidok, String> zrealizowanoColumn;
 
@@ -68,6 +76,7 @@ public class WidokPacjentaController {
         createZapisy();
     }
 
+
     @FXML
     void initialize() throws SQLException, ClassNotFoundException {
         assert godzinaColumn != null : "fx:id=\"godzinaColumn\" was not injected: check your FXML file 'widokPacjenta.fxml'.";
@@ -82,7 +91,6 @@ public class WidokPacjentaController {
         dbUtill = new DbUtill();
         dbUtill.dbConnect();
         pacjentWidokDAO = new PacjentWidokDAO(dbUtill);
-        wyswietleniaInformacjiPacjenta(n);
     }
 
     public void createZapisy() {

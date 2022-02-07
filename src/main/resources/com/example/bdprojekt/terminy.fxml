@@ -30,26 +30,20 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="114.0" layoutY="47.0" prefHeight="27.0" prefWidth="94.0" text="Podaj date">
+            <Label layoutX="74.0" layoutY="56.0" prefHeight="35.0" prefWidth="161.0" text="Podaj date">
                <font>
-                  <Font size="18.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
-            <Label layoutX="114.0" layoutY="96.0" text="Podaj godzine">
+            <Label layoutX="74.0" layoutY="130.0" text="Podaj godzine">
                <font>
-                  <Font size="18.0" />
+                  <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="godzinaTerminy" alignment="CENTER" layoutX="256.0" layoutY="97.0" prefHeight="25.0" prefWidth="174.0" promptText="np. 13:30" />
-            <Button fx:id="zatwierdzButton" layoutX="184.0" layoutY="202.0" mnemonicParsing="false" onAction="#zatwierdzButtonClick" prefHeight="25.0" prefWidth="232.0" stylesheets="@styles.css" text="Zatwierdź" />
-            <Button fx:id="anulujButton" layoutX="184.0" layoutY="257.0" mnemonicParsing="false" onAction="#anulujButtonClick" prefHeight="25.0" prefWidth="232.0" stylesheets="@styles.css" text="Anuluj" />
-            <TextField fx:id="realizacjaEDX" alignment="CENTER" editable="false" layoutX="257.0" layoutY="152.0" prefHeight="25.0" prefWidth="172.0" promptText="realizacjaEDX" text="nie" />
-            <Label layoutX="117.0" layoutY="151.0" prefHeight="27.0" prefWidth="108.0" text="Zrealizowano">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <TextField fx:id="dataTermin" alignment="CENTER" layoutX="256.0" layoutY="48.0" prefHeight="25.0" prefWidth="174.0" promptText="np. 2020.10.20" />
+            <TextField fx:id="godzinaTerminy" alignment="CENTER" layoutX="238.0" layoutY="130.0" prefHeight="35.0" prefWidth="187.0" promptText="np. 13:30" />
+            <Button fx:id="zatwierdzButton" layoutX="193.0" layoutY="202.0" mnemonicParsing="false" onAction="#zatwierdzButtonClick" prefHeight="25.0" prefWidth="232.0" stylesheets="@styles.css" text="Zatwierdź" />
+            <Button fx:id="anulujButton" layoutX="193.0" layoutY="256.0" mnemonicParsing="false" onAction="#anulujButtonClick" prefHeight="25.0" prefWidth="232.0" stylesheets="@styles.css" text="Anuluj" />
+            <TextField fx:id="dataTermin" alignment="CENTER" layoutX="238.0" layoutY="56.0" prefHeight="35.0" prefWidth="187.0" promptText="np. 2020.10.20" />
          </children>
       </AnchorPane>
    </left>

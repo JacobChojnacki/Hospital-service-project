@@ -3,6 +3,7 @@ package com.example.bdprojekt.zapisy;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -28,16 +29,16 @@ public class ZapisyController {
     private Button anulujButton;
 
     @FXML
-    private ComboBox<Wizyty> godzinaBox;
+    private ComboBox godzinaBox;
 
     @FXML
-    private ComboBox<Wizyty> producentBox;
+    private ComboBox producentBox;
 
     @FXML
-    private ComboBox<Wizyty> rodzajBox;
+    private ComboBox rodzajBox;
 
     @FXML
-    private ComboBox<Wizyty> dataWizytyBox;
+    private ComboBox dataWizytyBox;
 
     @FXML
     private Button zapiszButton;
@@ -66,7 +67,8 @@ public class ZapisyController {
     void zapiszButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try{
             if(rodzajBox.getValue()!=null && producentBox.getValue()!=null && godzinaBox.getValue()!=null && dataWizytyBox.getValue() != null){
-                wizytyDao.dodajZapis("99011003939","DURANT",dataWizytyBox.getValue().toString(),godzinaBox.getValue().toString());
+                wizytyDao.dodajZapis("99011003939", creatorID(),dataWizytyBox.getValue().toString(),godzinaBox.getValue().toString());
+//                wizytyDao.dodajZapis("99011003939","DURANT", "2010.10.20","00:00:13");
             }
         }catch (SQLException e){
             throw e;

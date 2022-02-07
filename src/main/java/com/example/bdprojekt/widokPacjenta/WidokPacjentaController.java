@@ -1,5 +1,6 @@
 package com.example.bdprojekt.widokPacjenta;
 
+import java.io.IOException;
 import java.sql.*;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
@@ -69,6 +70,16 @@ public class WidokPacjentaController {
         Stage stage = (Stage) zakonczButton.getScene().getWindow();
         dbUtill.dbDisconnect();
         stage.close();
+    }
+
+    @FXML
+    void usunButtonAction(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("widokPacjentaUsunTermin.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML

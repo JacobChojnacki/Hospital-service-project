@@ -17,4 +17,5 @@ module com.example.bdprojekt {
     opens com.example.bdprojekt.widokPrzychodni;
     opens com.example.bdprojekt.zapisy;
     opens com.example.bdprojekt.widokPacjenta.zmianaTerminu;
+    opens com.example.bdprojekt.statystyki;
 }

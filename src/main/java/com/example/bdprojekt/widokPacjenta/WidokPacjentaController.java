@@ -5,16 +5,14 @@ import java.sql.*;
 import com.example.bdprojekt.Connector.DbUtill;
 import com.example.bdprojekt.Main;
 import com.example.bdprojekt.models.PacjentWidok;
+import com.example.bdprojekt.zapisy.ZapisyController;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -36,7 +34,7 @@ public class WidokPacjentaController {
     private TableColumn<PacjentWidok, String> typSzczepieniaColumn;
 
     @FXML
-    private Label uzytkownikLabel;
+    private TextField uzytkownikLabel;
 
     @FXML
     private Button zakonczButton;
@@ -62,7 +60,6 @@ public class WidokPacjentaController {
     }
 
     DbUtill dbUtill = new DbUtill();
-//    ObservableList<PacjentWidok> pacjentWidokLista = FXCollections.observableArrayList();
     private PacjentWidokDAO pacjentWidokDAO;
 
     @FXML
@@ -87,6 +84,10 @@ public class WidokPacjentaController {
         createZapisy();
     }
 
+    @FXML
+    void odświeżButtonAction(ActionEvent event) throws SQLException, ClassNotFoundException {
+        wyswietleniaInformacjiPacjenta(uzytkownikLabel.getText());
+    }
 
     @FXML
     void initialize() throws SQLException, ClassNotFoundException {
@@ -109,6 +110,8 @@ public class WidokPacjentaController {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource("zapisy.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
+            ZapisyController zapisyController = loader.getController();
+            zapisyController.setUzytkownikEDX(uzytkownikLabel.getText());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
@@ -138,6 +141,9 @@ public class WidokPacjentaController {
         }catch (SQLException e) {
             throw e;
         }
+    }
+    private void getPesel(){
+        System.out.println(uzytkownikLabel.getText());
     }
 }
 

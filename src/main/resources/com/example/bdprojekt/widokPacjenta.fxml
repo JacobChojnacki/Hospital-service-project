@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -21,13 +21,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Pane prefHeight="5.0" prefWidth="600.0" styleClass="line-color" />
-                  <Label fx:id="uzytkownikLabel" alignment="CENTER" prefHeight="44.0" prefWidth="600.0" text="Uzytkownik">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Pane prefHeight="5.0" prefWidth="600.0" styleClass="line-color" />
+                  <TextField fx:id="uzytkownikLabel" alignment="CENTER" editable="false" text="Username" />
                </children>
             </VBox>
          </children>
@@ -42,7 +36,8 @@
         </columns>
       </TableView>
       <Button fx:id="zapiszButton" layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#zapiszButtonAction" prefHeight="25.0" prefWidth="164.0" text="Zapisz sie na szczepienie" />
-      <Button fx:id="zakonczButton" layoutX="403.0" layoutY="342.0" mnemonicParsing="false" onAction="#zakonczButtonAction" prefHeight="25.0" prefWidth="183.0" text="Zakończ" />
+      <Button fx:id="zakonczButton" layoutX="500.0" layoutY="342.0" mnemonicParsing="false" onAction="#zakonczButtonAction" prefHeight="25.0" prefWidth="75.0" text="Zakończ" />
       <Button fx:id="usunButton" layoutX="209.0" layoutY="342.0" mnemonicParsing="false" onAction="#usunButtonAction" prefWidth="164.0" text="Usun termin" />
+      <Button fx:id="odświeżButton" layoutX="404.0" layoutY="342.0" mnemonicParsing="false" onAction="#odświeżButtonAction" prefHeight="25.0" prefWidth="75.0" text="Odśwież" />
    </children>
 </AnchorPane>

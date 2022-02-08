@@ -57,7 +57,7 @@ public class PrzychodniaWidok {
     private TableColumn<Pacjent, String> typ;
 
     @FXML
-    private Button usunButton;
+    private Button zrealizujButton;
 
     @FXML
     private Label uzytkownikLabel;
@@ -70,6 +70,12 @@ public class PrzychodniaWidok {
 
     @FXML
     private Button szczepieniaButton;
+
+    @FXML
+    private TextField terminEDX;
+
+    @FXML
+    private TextField id_szczEDX;
 
     Connection connection = null;
     ResultSet resultSet = null;
@@ -88,7 +94,7 @@ public class PrzychodniaWidok {
         assert statystykiButton != null : "fx:id=\"statystykiButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert termin != null : "fx:id=\"termin\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert typ != null : "fx:id=\"typ\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
-        assert usunButton != null : "fx:id=\"usunButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
+        assert zrealizujButton != null : "fx:id=\"usunButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert uzytkownikLabel != null : "fx:id=\"uzytkownikLabel\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert wyszukajButton != null : "fx:id=\"wyszukajButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
         assert termin != null : "fx:id=\"terminButton\" was not injected: check your FXML file 'widokPrzychodni.fxml'.";
@@ -96,10 +102,6 @@ public class PrzychodniaWidok {
         dbUtill = new DbUtill();
         dbUtill.dbConnect();
         pacjentDAO = new PacjentDAO(dbUtill);
-    }
-
-    private void odswiezanieTabeli(){
-
     }
 
     @FXML
@@ -117,7 +119,7 @@ public class PrzychodniaWidok {
         try {
             if(peselEDX.getText() != null) {
                 pacjenciTable.getItems().clear();
-                ObservableList<Pacjent> pacjenciData = pacjentDAO.szukajPacjenta(peselEDX.getText());
+                ObservableList<Pacjent> pacjenciData = pacjentDAO.szukajPacjenta(peselEDX.getText(),id_szczEDX.getText(),termin.getText());
                 bazaPacjentow(pacjenciData);
                 zaladujDane();
             }
@@ -151,10 +153,10 @@ public class PrzychodniaWidok {
     }
 
     @FXML
-    private void usunButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
+    private void zrealizujButtonClick(ActionEvent event) throws SQLException, ClassNotFoundException{
         try {
             if(peselEDX.getText() != null){
-                pacjentDAO.usunPacjenta(peselEDX.getText());
+                pacjentDAO.realizacjaPacjenta(terminEDX.getText(),id_szczEDX.getText(), peselEDX.getText());
             }
         } catch (SQLException e) {
             throw e;
@@ -162,8 +164,13 @@ public class PrzychodniaWidok {
     }
 
     @FXML
-    private void statystykiButtonClick(ActionEvent e) {
-
+    private void statystykiButtonClick(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("statystyki.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void bazaPacjentow(ObservableList<Pacjent> pacjentData) {

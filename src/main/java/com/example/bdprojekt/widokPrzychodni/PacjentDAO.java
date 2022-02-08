@@ -14,6 +14,7 @@ public class PacjentDAO {
     public PacjentDAO(DbUtill dbUtill) {
         this.dbUtill = dbUtill;
     }
+
     private ObservableList<Pacjent> pacjenciLista(ResultSet resultSet) throws SQLException{
         ObservableList<Pacjent> pacjenci = FXCollections.observableArrayList();
 
@@ -41,7 +42,7 @@ public class PacjentDAO {
             throw e;
         }
     }
-    public ObservableList<Pacjent> szukajPacjenta(String n) throws SQLException, ClassNotFoundException{
+    public ObservableList<Pacjent> szukajPacjenta(String n,String x, String y) throws SQLException, ClassNotFoundException{
         String selectStmt = "SELECT * FROM punkt_szczepien.widokpunktu WHERE pesel LIKE '%" + n + "%';";
 
         try{
@@ -52,9 +53,13 @@ public class PacjentDAO {
             throw e;
         }
     }
-    public void usunPacjenta(String pesel) throws SQLException, ClassNotFoundException {
-        StringBuilder sb = new StringBuilder("DELETE FROM punkt_szczepien.pacjenci WHERE pesel = '");
+    public void realizacjaPacjenta(String termin, String ID_szcz, String pesel) throws SQLException, ClassNotFoundException {
+        StringBuilder sb = new StringBuilder("UPDATE punkt_szczepien.wizyty set zrealizowano = 'tak' WHERE pesel = ");
         sb.append(pesel);
+        sb.append(" and termin = '");
+        sb.append(termin);
+        sb.append("' and ID_szcz = '");
+        sb.append(ID_szcz);
         sb.append("';");
         String insertStmt = sb.toString();
 
